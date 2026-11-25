@@ -15,34 +15,51 @@ public class Chess{
             list.add(temp);
         }
 
-        
+        char[] first = list.get(1).toCharArray();
 
-        
+        int firsta = first[0] - 'A' + 1;
+        int firstb = first[2] - '0';
+        int seconda = first[4] - 'A' + 1;
+        int secondb = first[6] - '0';
+
+        int[] firstAns = solve(firsta, firstb, seconda, secondb);
+        int[] secondAns = solve(seconda, secondb, firsta, firstb);
+
+        char point1;
+
+        if(firstAns[0] > 8 || firstAns[1] > 8){
+            System.out.println("error in first");
+            firstAns[0] = -1;
+            firstAns[1] = -1;
+        }
+        else{
+            for(int i = 0; i < firstAns.length; i++){
+                System.out.println(firstAns[i]);
+                
+            }
+        }
+
+        if(secondAns[0] > 8 || secondAns[0] > 8){
+            System.out.println("error in second one");
+        }
+        else{
+            for(int i = 0; i < secondAns.length; i++){
+                System.out.println(secondAns[i]);
+            }
+        }
 
 
     }
 
-    public static void solve(int x1, int y1, int x2, int y2){
+    public static int[] solve(int x1, int y1, int x2, int y2){
 
-        //y - x = y1 - x1
-
-        //x + y = y2 + x2
-
-        /*
-        y3 = y1 - x1
-        x3 = x2 + y2
-
-        2x = x3 - y3 -> 
-                x = (x3 - y3) / 2
-
-        y = y3 + x
-        */
        int y3 = y1 - x1;
+       
        int x3 = x2 + y2;
 
        int x = (x3 - y3) / 2;
        int y = y3 + x;
 
-       System.out.println("x: " + x + " and y: " + y);
+        return new int[]{x,y};
     }
 }
